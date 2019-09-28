@@ -1,0 +1,247 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <algorithm>
+#include<stdlib.h>
+#include <cstring>        // for strcpy(), strcat()
+#include <io.h>
+using namespace std;
+
+struct student
+{
+    string id;
+    unsigned int grade;
+    string r1;
+    string r2;
+    string r3;
+    student()
+    {
+        id="";
+        grade=0;
+        r1="";
+        r2="";
+        r3="";
+    }
+};
+
+void split_string(const std::string& s, std::vector<std::string>& v, const std::string& c)
+{
+  //https://www.zhihu.com/question/36642771
+  std::string::size_type pos1, pos2;
+  pos2 = s.find(c);
+  pos1 = 0;
+  while(std::string::npos != pos2)
+  {
+    v.push_back(s.substr(pos1, pos2-pos1));
+
+    pos1 = pos2 + c.size();
+    pos2 = s.find(c, pos1);
+  }
+  if(pos1 != s.length())
+    v.push_back(s.substr(pos1));
+}
+
+int main()
+{
+    char srcpath[256]="";
+    _getcwd(srcpath,256);//得到当前路径
+    strcat(srcpath, "\\grade.txt");
+    ifstream input;
+    input.open(srcpath);
+    string s;
+    vector<std::string> v;
+    vector<student> stu;
+    struct student temp;
+    while(getline(input,s))
+    {
+        split_string(s,v," ");
+        temp.id=v[0];
+        temp.grade=atoi(v[1].c_str());
+        temp.r1=v[2];
+        temp.r2=v[3];
+        temp.r3=v[4];
+        stu.push_back(temp);
+        v.clear();
+    }
+    std::sort(stu.begin(),stu.end(),[]( student const& a,student const&b )
+           {return a.grade > b.grade;}
+        );
+    vector <student> schoolA;
+    vector <student> schoolB;
+    vector <student> schoolC;
+    vector <student> schoolD;
+    vector <student> schoolE;
+    for(int i=0;i<stu.size();i++)
+    {
+        if(stu[i].r1!="")
+        {
+            if(stu[i].r1=="A")
+            {
+                if(schoolA.size()!=15)
+                {
+                    schoolA.push_back(stu[i]);
+                    continue;
+                }
+            }
+            else if(stu[i].r1=="B")
+            {
+                if(schoolB.size()!=15)
+                {
+                    schoolB.push_back(stu[i]);
+                    continue;
+                }
+            }
+            else if(stu[i].r1=="C")
+            {
+                if(schoolC.size()!=15)
+                {
+                    schoolC.push_back(stu[i]);
+                    continue;
+                }
+            }
+            else if(stu[i].r1=="D")
+            {
+                if(schoolD.size()!=15)
+                {
+                    schoolD.push_back(stu[i]);
+                    continue;
+                }
+            }
+            else if(stu[i].r1=="E")
+            {
+                if(schoolE.size()!=15)
+                {
+                    schoolE.push_back(stu[i]);
+                    continue;
+                }
+            }
+        }
+        if(stu[i].r2!="")
+        {
+            if(stu[i].r2=="A")
+            {
+                if(schoolA.size()!=15)
+                {
+                    schoolA.push_back(stu[i]);
+                    continue;
+                }
+            }
+            else if(stu[i].r2=="B")
+            {
+                if(schoolB.size()!=15)
+                {
+                    schoolB.push_back(stu[i]);
+                    continue;
+                }
+            }
+            else if(stu[i].r2=="C")
+            {
+                if(schoolC.size()!=15)
+                {
+                    schoolC.push_back(stu[i]);
+                    continue;
+                }
+            }
+            else if(stu[i].r2=="D")
+            {
+                if(schoolD.size()!=15)
+                {
+                    schoolD.push_back(stu[i]);
+                    continue;
+                }
+            }
+            else if(stu[i].r2=="E")
+            {
+                if(schoolE.size()!=15)
+                {
+                    schoolE.push_back(stu[i]);
+                    continue;
+                }
+            }
+        }
+         if(stu[i].r3!="")
+        {
+            if(stu[i].r3=="A")
+            {
+                if(schoolA.size()!=15)
+                {
+                    schoolA.push_back(stu[i]);
+                    continue;
+                }
+            }
+            else if(stu[i].r3=="B")
+            {
+                if(schoolB.size()!=15)
+                {
+                    schoolB.push_back(stu[i]);
+                    continue;
+                }
+            }
+            else if(stu[i].r3=="C")
+            {
+                if(schoolC.size()!=15)
+                {
+                    schoolC.push_back(stu[i]);
+                    continue;
+                }
+            }
+            else if(stu[i].r3=="D")
+            {
+                if(schoolD.size()!=15)
+                {
+                    schoolD.push_back(stu[i]);
+                    continue;
+                }
+            }
+            else if(stu[i].r3=="E")
+            {
+                if(schoolE.size()!=15)
+                {
+                    schoolE.push_back(stu[i]);
+                    continue;
+                }
+            }
+        }
+    }
+    cout<<"School A:"<<endl;
+    cout<<"------------------------------"<<endl;
+    cout<<"编号 分数"<<endl;
+    for(int i=0;i<schoolA.size();i++)
+    {
+        cout<<schoolA[i].id<<" "<<schoolA[i].grade<<endl;
+    }
+    cout<<"------------------------------"<<endl;
+    cout<<"School B:"<<endl;
+    cout<<"------------------------------"<<endl;
+    cout<<"编号 分数"<<endl;
+    for(int i=0;i<schoolB.size();i++)
+    {
+        cout<<schoolB[i].id<<" "<<schoolB[i].grade<<endl;
+    }
+    cout<<"------------------------------"<<endl;
+    cout<<"School C:"<<endl;
+    cout<<"------------------------------"<<endl;
+    cout<<"编号 分数"<<endl;
+    for(int i=0;i<schoolC.size();i++)
+    {
+        cout<<schoolC[i].id<<" "<<schoolC[i].grade<<endl;
+    }
+    cout<<"------------------------------"<<endl;
+    cout<<"School D:"<<endl;
+    cout<<"------------------------------"<<endl;
+    for(int i=0;i<schoolD.size();i++)
+    {
+        cout<<schoolD[i].id<<" "<<schoolD[i].grade<<endl;
+    }
+    cout<<"------------------------------"<<endl;
+    cout<<"School E:"<<endl;
+    cout<<"------------------------------"<<endl;
+    for(int i=0;i<schoolE.size();i++)
+    {
+        cout<<schoolE[i].id<<" "<<schoolE[i].grade<<endl;
+    }
+
+}
+
+
+
